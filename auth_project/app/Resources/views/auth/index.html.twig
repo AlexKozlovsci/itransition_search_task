@@ -1,0 +1,52 @@
+{% extends 'base_auth.html.twig' %}
+
+{% block title %}
+    Auth
+{% endblock %}
+
+{% block body %}
+        <div class="container-fluid">
+            <div class="row auth-margin-top">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+
+                            <h2 class="text-center">Authorization</h2>
+                            <form action="{{ path('security_login_check') }}" method="post">
+                                {% if error %}
+                                    <div class="alert alert-danger">
+                                        {{ error.messageKey|trans(error.messageData) }}
+                                    </div>
+                                {% endif %}
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="_email" placeholder="Enter email" value="{{ last_username }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="_password" placeholder="Enter password">
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-5 col-sm-offset-1">
+                                        <button type="submit" class="btn btn-success col-sm-12">Sign in</button>
+                                    </div>
+                                    <div class="col-sm-5 ">
+                                        <a type="submit" href="{{ path('user_register') }}" class="btn btn-info col-sm-12">Sign up</a>
+                                    </div>
+                                </div>
+                            </form>
+                            <br>
+
+                            <h3 class="text-center">Auth with social networks: <a href="../connect/vkontakte"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                                <a  href="../connect/facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>   <a href="../connect/twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></h3>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+{% endblock %}
+

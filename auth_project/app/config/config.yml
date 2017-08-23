@@ -1,0 +1,117 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+
+framework:
+    #esi: ~
+    #translator: { fallbacks: ['%locale%'] }
+    secret: '%secret%'
+    router:
+        resource: '%kernel.project_dir%/app/config/routing.yml'
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    #serializer: { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: '%locale%'
+    trusted_hosts: ~
+    session:
+        # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+    fragments: ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+        charset: UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #path: '%database_path%'
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: '%mailer_transport%'
+    host: '%mailer_host%'
+    username: '%mailer_user%'
+    password: '%mailer_password%'
+    spool: { type: memory }
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+
+
+hwi_oauth:
+    connect:
+        account_connector: my.custom.user_provider
+    # list of names of the firewalls in which this bundle is active, this setting MUST be set
+    firewall_names: [main]
+    fosub:
+        username_iterations: 30
+        properties:
+            vkontakte:    vkontakte_id
+            twitter:      twitter_id
+            facebook:     facebook_id
+
+    resource_owners:
+        vkontakte:
+           type: vkontakte
+           client_id: 6150513
+           client_secret: tgGjQ7Z6aRIvxAmxT9oW
+           scope: "email, username"
+
+        facebook:
+           type: facebook
+           client_id: 1854081264608613
+           client_secret: 271c24218349ab4d36612a693b9663ce
+           scope: "email, public_profile"
+
+        twitter:
+           type: twitter
+           client_id: YQk595Zyt5XuhSazkTAabG0Ex
+           client_secret: VzjasnAd1bhKkWDuV0QL3gfXU8XbscA5AOylDhnDGqwEzryoQk
+           scope: "email, name"
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    resetting:
+      retry_ttl: 0
+    from_email:
+        address:        "sd@sds.net"
+        sender_name:    "sdsd"

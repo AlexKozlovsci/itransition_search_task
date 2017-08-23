@@ -1,0 +1,42 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+
+security:
+    encoders:
+        AppBundle\Entity\User: bcrypt
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+        hwi:
+            id: hwi_oauth.user.provider
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+
+            form_login:
+                provider: fos_userbundle
+            guard:
+                authenticators:
+                    - app.form_login_authenticator
+            logout:
+                path: /auth/logout
+                target: /auth/login
+
+            oauth:
+                 resource_owners:
+                     vkontakte: vk_check
+                     facebook: fb_check
+                     twitter: tw_check
+
+                 login_path: /auth/login
+
+                 oauth_user_provider:
+                     service: my.custom.user_provider
+
+    access_control:
+        - { path: ^/users, roles: ROLE_USER }

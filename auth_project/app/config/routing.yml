@@ -1,0 +1,48 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /auth/login
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /connect
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+vk_check:
+    path: /auth/login/check-vk
+
+fb_check:
+    path: /auth/login/check-fb
+
+tw_check:
+    path: /auth/login/check-tw
+
+#login:
+#    pattern:   /login
+#    defaults:  { _controller: FoggylineTickerBundle:Security:login }
+
+#login_check:
+#    pattern:   /login_check
+#
+
+logout:
+    path:   /auth/logout
+
+
+#users_bundle:
+#    resource: "@AppBundle/Controller/UserController.php"
+#    type:     annotation
+#    prefix:   /users
+
+#nonauth_user:
+#    resource: "@AppBundle/Controller/AuthController.php"
+#    type:     annotation
+#    prefix:   /auth/login
+
+
