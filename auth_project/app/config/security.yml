@@ -40,3 +40,4 @@ security:
 
     access_control:
         - { path: ^/users, roles: ROLE_USER }
+        - { path: ^/search, roles: ROLE_USER }

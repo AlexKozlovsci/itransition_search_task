@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="panel panel-default users-margin-top">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <h2 class="text-center">Search some components:</h2>
+                                <form action="{{ path('start_search') }}" method="get" class="search" onsubmit="return false;">
+                                    <input type="text" name="search" placeholder="Поиск" class="input" id="search" />
+                                    <input type="submit" value="" class="submit" />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <div id="resSearch"></div>
+                                <div  id="scrollable">
+                                    <table class="table table-striped" >
+                                        <thead >
+                                            <tr>
+                                                <th class="text-center">Image</th>
+                                                <th class="text-center">Thing</th>
+                                                <th class="text-center">Status</th>
+                                                <th class="text-center">Cost</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-insert">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <img id="loadImg" src="{{ asset('public/img/load.gif') }}" />
+{% endblock %}
+

@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 
+
 class UserController extends Controller
 {
     private function renderPage($page, $data)
@@ -46,6 +47,10 @@ class UserController extends Controller
             $user->setEnabled(true);
         }
         $em->flush();
+        $currUser = $this->get('security.token_storage')->getToken()->getUser();
+        $currUser = $currUser->getUsername();
+        if ($currUser == $user->getUsername())
+            return $this->redirectToRoute('logout');
         return $this->redirectToRoute('users');
     }
 
